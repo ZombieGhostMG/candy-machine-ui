@@ -1,5 +1,10 @@
 import { useCallback, useEffect, useMemo, useState } from "react";
 import * as anchor from "@project-serum/anchor";
+import "./App.css";
+import BasicGif from "./assets/Basic.gif"
+import MythicalGif from "./assets/Mythical.gif"
+import OGGif from "./assets/OG.gif"
+import UltimateGif from "./assets/Ultimate.gif"
 
 import styled from "styled-components";
 import { Container, Snackbar } from "@material-ui/core";
@@ -45,6 +50,7 @@ const ConnectButton = styled(WalletDialogButton)`
 const MintContainer = styled.div``; // add your owns styles here
 
 export interface HomeProps {
+  itemName: string;
   candyMachineId?: anchor.web3.PublicKey;
   connection: anchor.web3.Connection;
   txTimeout: number;
@@ -487,8 +493,13 @@ const Home = (props: HomeProps) => {
   }, [refreshCandyMachineState]);
 
   return (
+    <div className="item-div">
     <Container style={{ marginTop: 100 }}>
       <Container maxWidth="xs" style={{ position: "relative" }}>
+      {props.itemName === "Basic" && <img src={BasicGif} className="NFT-image"/>}
+      {props.itemName === "Mythical" && <img src={MythicalGif} className="NFT-image"/>}
+      {props.itemName === "OG" && <img src={OGGif} className="NFT-image"/>}
+      {props.itemName === "Ultimate" && <img src={UltimateGif} className="NFT-image"/>}
         <Paper
           style={{
             padding: 24,
@@ -645,7 +656,6 @@ const Home = (props: HomeProps) => {
             display="block"
             style={{ marginTop: 7, color: "grey" }}
           >
-            Powered by METAPLEX
           </Typography>
         </Paper>
       </Container>
@@ -665,6 +675,7 @@ const Home = (props: HomeProps) => {
         </Alert>
       </Snackbar>
     </Container>
+    </div>
   );
 };
 

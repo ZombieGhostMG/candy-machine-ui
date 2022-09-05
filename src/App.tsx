@@ -27,9 +27,33 @@ const theme = createTheme({
   },
 });
 
-const getCandyMachineId = (): anchor.web3.PublicKey | undefined => {
+const getCandyMachineIdBasic = (): anchor.web3.PublicKey | undefined => {
   try {
-    return new anchor.web3.PublicKey(process.env.REACT_APP_CANDY_MACHINE_ID!);
+    return new anchor.web3.PublicKey(process.env.REACT_APP_CANDY_MACHINE_ID_BASIC!);
+  } catch (e) {
+    console.log("Failed to construct CandyMachineId", e);
+    return undefined;
+  }
+};
+const getCandyMachineIdMythical = (): anchor.web3.PublicKey | undefined => {
+  try {
+    return new anchor.web3.PublicKey(process.env.REACT_APP_CANDY_MACHINE_ID_MYTHICAL!);
+  } catch (e) {
+    console.log("Failed to construct CandyMachineId", e);
+    return undefined;
+  }
+};
+const getCandyMachineIdOG = (): anchor.web3.PublicKey | undefined => {
+  try {
+    return new anchor.web3.PublicKey(process.env.REACT_APP_CANDY_MACHINE_ID_OG!);
+  } catch (e) {
+    console.log("Failed to construct CandyMachineId", e);
+    return undefined;
+  }
+};
+const getCandyMachineIdUltimate = (): anchor.web3.PublicKey | undefined => {
+  try {
+    return new anchor.web3.PublicKey(process.env.REACT_APP_CANDY_MACHINE_ID_ULTIMATE!);
   } catch (e) {
     console.log("Failed to construct CandyMachineId", e);
     return undefined;
@@ -46,7 +70,10 @@ if (process.env.REACT_APP_SOLANA_NETWORK === undefined) {
     "Your REACT_APP_SOLANA_RPC_HOST value in the .env file doesn't look right! Make sure you enter it in as a plain-text url (i.e., https://metaplex.devnet.rpcpool.com/)";
 }
 
-const candyMachineId = getCandyMachineId();
+const candyMachineIdBasic = getCandyMachineIdBasic();
+const candyMachineIdMythical = getCandyMachineIdMythical();
+const candyMachineIdOG = getCandyMachineIdOG();
+const candyMachineIdUltimate = getCandyMachineIdUltimate();
 const network = (process.env.REACT_APP_SOLANA_NETWORK ??
   "devnet") as WalletAdapterNetwork;
 const rpcHost =
@@ -72,14 +99,44 @@ const App = () => {
       <ConnectionProvider endpoint={endpoint}>
         <WalletProvider wallets={wallets} autoConnect>
           <WalletDialogProvider>
+            <div className="body-div">
             <Home
-              candyMachineId={candyMachineId}
+              itemName="Basic"
+              candyMachineId={candyMachineIdBasic}
               connection={connection}
               txTimeout={DEFAULT_TIMEOUT}
               rpcHost={rpcHost}
               network={network}
               error={error}
             />
+            <Home
+              itemName="Mythical"
+              candyMachineId={candyMachineIdMythical}
+              connection={connection}
+              txTimeout={DEFAULT_TIMEOUT}
+              rpcHost={rpcHost}
+              network={network}
+              error={error}
+            />
+            <Home
+              itemName="OG"
+              candyMachineId={candyMachineIdOG}
+              connection={connection}
+              txTimeout={DEFAULT_TIMEOUT}
+              rpcHost={rpcHost}
+              network={network}
+              error={error}
+            />
+            <Home
+              itemName="Ultimate"
+              candyMachineId={candyMachineIdUltimate}
+              connection={connection}
+              txTimeout={DEFAULT_TIMEOUT}
+              rpcHost={rpcHost}
+              network={network}
+              error={error}
+            />
+            </div>
           </WalletDialogProvider>
         </WalletProvider>
       </ConnectionProvider>

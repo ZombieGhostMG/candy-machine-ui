@@ -2,9 +2,6 @@ import { useCallback, useEffect, useMemo, useState } from "react";
 import * as anchor from "@project-serum/anchor";
 import "./App.css";
 import BasicGif from "./assets/Basic.gif"
-import MythicalGif from "./assets/Mythical.gif"
-import OGGif from "./assets/OG.gif"
-import UltimateGif from "./assets/Ultimate.gif"
 
 import styled from "styled-components";
 import { Container, Snackbar } from "@material-ui/core";
@@ -497,9 +494,6 @@ const Home = (props: HomeProps) => {
     <Container style={{ marginTop: 100 }}>
       <Container maxWidth="xs" style={{ position: "relative" }}>
       {props.itemName === "Basic" && <img src={BasicGif} className="NFT-image"/>}
-      {props.itemName === "Mythical" && <img src={MythicalGif} className="NFT-image"/>}
-      {props.itemName === "OG" && <img src={OGGif} className="NFT-image"/>}
-      {props.itemName === "Ultimate" && <img src={UltimateGif} className="NFT-image"/>}
         <Paper
           style={{
             padding: 24,
